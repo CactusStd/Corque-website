@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corque — Local-first AI assistant that gets things done</title>
+  <meta name="description" content="Run a personal AI assistant on your machine. Chat to manage todos, email, weather, code, and more—with tools and skills you can extend." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="#" class="logo">
+        <img src="assets/Corque-icon-222deab8-fa22-4415-8a16-df64a60176ea.png" alt="Corque" class="logo-img" />
+        <span>Corque</span>
+      </a>
+      <nav class="nav">
+        <a href="#landing">Home</a>
+        <a href="#demo">Demo</a>
+        <a href="#docs">Docs</a>
+        <a href="#getting-started">Getting Started</a>
+        <a href="#concepts">Concepts</a>
+        <a href="#cookbook">Cookbook</a>
+        <a href="#registry">Registry</a>
+        <a href="#community">Community</a>
+        <a href="contacts.html">Contact</a>
+        <a href="https://github.com/StDoses72/Corque-AI-agent" target="_blank" rel="noopener noreferrer" class="nav-gh">GitHub</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu"><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section id="landing" class="hero">
+      <div class="hero-bg"></div>
+      <div class="wrap hero-wrap">
+        <div class="hero-content">
+          <h1 class="hero-title animate-in">
+            Your computer. Your data. One assistant.
+          </h1>
+          <p class="hero-tagline animate-in delay-1">
+            Corque is a <strong>local-first</strong> personal AI that runs on your machine. Chat in natural language—manage todos, email, weather, run code, and more. Extend it with <strong>tools</strong> and <strong>skills</strong>.
+          </p>
+          <div class="hero-cta animate-in delay-2">
+            <a href="#getting-started" class="btn btn-primary">Get started</a>
+            <a href="#demo" class="btn btn-secondary">See demo</a>
+          </div>
+        </div>
+        <div class="hero-visual animate-in delay-2">
+          <img src="assets/Corque-conversation_2.png" alt="Corque chat: Good afternoon! with input bar" class="hero-img" />
+        </div>
+      </div>
+    </section>
+
+    <section class="selling-points">
+      <div class="wrap">
+        <h2 class="section-title">Why Corque</h2>
+        <div class="points-grid">
+          <article class="point-card reveal">
+            <div class="point-icon">🏠</div>
+            <h3>Local-first</h3>
+            <p>Runs with Ollama on your machine by default. Your data stays local; optionally plug in OpenAI or other cloud models via config.</p>
+          </article>
+          <article class="point-card reveal">
+            <div class="point-icon">🔧</div>
+            <h3>Tool-ready Agent</h3>
+            <p>Built on LangChain + LangGraph. You talk → the model picks tools → runs them → replies in plain language. Todos, email, weather, code, search, and more.</p>
+          </article>
+          <article class="point-card reveal">
+            <div class="point-icon">📚</div>
+            <h3>Skills &amp; plugins</h3>
+            <p>Extensible skill packs in Markdown define workflows and when to use which tools. Add your own tools and skills to shape one assistant that can do it all.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="demo-section">
+      <div class="wrap">
+        <h2 class="section-title">Shortest demo</h2>
+        <p class="section-desc">Get from zero to a working chat loop in a few lines. Replace this with a web UI when you’re ready.</p>
+        <div class="demo-code animate-in reveal">
+          <pre><code>from corque import Corque
+
+agent = Corque()
+while True:
+    user_input = input("You: ")
+    reply = agent.ask(user_input)
+    print("Corque:", reply)</code></pre>
+        </div>
+        <p class="demo-note">Run with <code>python main.py</code> (or <code>run.bat</code> on Windows).</p>
+      </div>
+    </section>
+
+    <section id="docs" class="docs-section">
+      <div class="wrap">
+        <h2 class="section-title">Docs</h2>
+        <p class="section-desc">Everything you need to run Corque, understand its design, and extend it.</p>
+
+        <div id="getting-started" class="doc-block reveal">
+          <h3>Getting started</h3>
+          <ul>
+            <li><strong>Run:</strong> <code>python main.py</code> or <code>run.bat</code> on Windows.</li>
+            <li><strong>Environment:</strong> Python 3.9+, Ollama installed with a model (e.g. <code>gpt-oss:120b-cloud</code>).</li>
+            <li><strong>Optional:</strong> Use a <code>.env</code> file for email, Tavily, OpenAI API keys, etc.</li>
+            <li><strong>Dependencies:</strong> <code>langchain</code>, <code>langchain-ollama</code>, <code>langgraph</code>, <code>python-dotenv</code>, <code>tzlocal</code>, <code>tavily-python</code> — see the project README.</li>
+          </ul>
+        </div>
+
+        <div id="concepts" class="doc-block reveal">
+          <h3>Concepts</h3>
+          <p><strong>Tools (the “hands”):</strong> Python functions decorated with <code>@tool</code>. The docstring is the contract: when to use the tool, parameters, and return shape. On failure, return <code>"Error: ..."</code> instead of raising. Keys and paths come from <code>config.settings</code>; use <code>timeTools</code> for time.</p>
+          <p><strong>Skills (the “brain”):</strong> Markdown files in <code>skills/</code> that describe workflows and when to call which tools. The agent gets skill names and short descriptions in the system prompt, then calls <code>load_skill(skill_name)</code> to pull full content when needed.</p>
+          <p>Flow:</p>
+          <div class="flow-diagram">
+            <span class="flow-node">User</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-node">Chat</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-node">Agent</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-node">Tools / Skills</span>
+            <span class="flow-arrow">→</span>
+            <span class="flow-node">Result</span>
+          </div>
+        </div>
+
+        <div id="cookbook" class="doc-block reveal">
+          <h3>Cookbook / Examples</h3>
+          <p>One-command examples you can copy and run:</p>
+          <ul class="cookbook-list">
+            <li>Manage todos: add, list, complete, filter by date.</li>
+            <li>Send email (with human-in-the-loop approval before sending).</li>
+            <li>Check weather by location (e.g. wttr.in).</li>
+            <li>Time: current UTC, timezone conversion, date math.</li>
+            <li>Search and news: Tavily search, daily news by topic.</li>
+            <li>Code: generate code and run it in a workspace (“write → run → fix” loop).</li>
+            <li>Domain data: domain lookup, World Bank, Open Library, earthquakes, Pokémon, Star Wars API, Stooq finance, etc.</li>
+          </ul>
+        </div>
+
+        <div id="registry" class="doc-block reveal">
+          <h3>Registry / Gallery</h3>
+          <p>Browse built-in tools and skills. Filter by category to see what’s available and how to combine them.</p>
+          <div class="registry-tabs">
+            <button type="button" class="reg-tab active" data-tab="tools">Tools</button>
+            <button type="button" class="reg-tab" data-tab="skills">Skills</button>
+          </div>
+          <div class="registry-panel active" id="tools-panel">
+            <ul class="registry-list">
+              <li>Todos — add, list, update, complete (SQLite)</li>
+              <li>Email — send, list unread (SMTP/IMAP, with approval)</li>
+              <li>Weather — by location</li>
+              <li>Time — UTC, timezone, date math</li>
+              <li>Search &amp; news — Tavily, daily news</li>
+              <li>Code — generate + run in workspace</li>
+              <li>Domain, World Bank, Open Library, USGS earthquakes, PokéAPI, Star Wars, Stooq, …</li>
+            </ul>
+          </div>
+          <div class="registry-panel" id="skills-panel">
+            <ul class="registry-list">
+              <li><code>coding_agent</code> — write → generate → run → fix flow</li>
+              <li><code>Cat_persona</code>, <code>skillArchitect</code>, <code>toolArchitect</code> — personas and design helpers</li>
+              <li>Add your own <code>skills/*.md</code> for new workflows.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="community" class="doc-block reveal">
+          <h3>Community</h3>
+          <ul>
+            <li><strong>Contributing:</strong> See the repo’s contribution guide. We welcome new tools and skills.</li>
+            <li><strong>Templates:</strong> Use the existing tool/skill structure as a template for your plugins.</li>
+            <li><strong>Roadmap:</strong> More tools, more skills, optional web UI — check the project README and issues.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Corque — local-first AI assistant. Tools + Skills, your machine.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
