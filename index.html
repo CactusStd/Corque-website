@@ -21,7 +21,6 @@
         <a href="#landing">Home</a>
         <a href="#demo">Demo</a>
         <a href="#docs">Docs</a>
-        <a href="#getting-started">Getting Started</a>
         <a href="#concepts">Concepts</a>
         <a href="#cookbook">Cookbook</a>
         <a href="#registry">Registry</a>
@@ -81,17 +80,11 @@
     <section id="demo" class="demo-section">
       <div class="wrap">
         <h2 class="section-title">Shortest demo</h2>
-        <p class="section-desc">Get from zero to a working chat loop in a few lines. Replace this with a web UI when you’re ready.</p>
+        <p class="section-desc">Clone the repo, install dependencies, then run the app. You get a chat loop in your terminal—no code to write.</p>
         <div class="demo-code animate-in reveal">
-          <pre><code>from corque import Corque
-
-agent = Corque()
-while True:
-    user_input = input("You: ")
-    reply = agent.ask(user_input)
-    print("Corque:", reply)</code></pre>
+          <pre><code>python main.py</code></pre>
         </div>
-        <p class="demo-note">Run with <code>python main.py</code> (or <code>run.bat</code> on Windows).</p>
+        <p class="demo-note">On Windows you can double-click <code>run.bat</code>. When you see "Corque is ready to assist you!", start typing. Type <code>quit</code> to exit.</p>
       </div>
     </section>
 
@@ -102,12 +95,29 @@ while True:
 
         <div id="getting-started" class="doc-block reveal">
           <h3>Getting started</h3>
+          <p><strong>Prerequisites</strong></p>
           <ul>
-            <li><strong>Run:</strong> <code>python main.py</code> or <code>run.bat</code> on Windows.</li>
-            <li><strong>Environment:</strong> Python 3.9+, Ollama installed with a model (e.g. <code>gpt-oss:120b-cloud</code>).</li>
-            <li><strong>Optional:</strong> Use a <code>.env</code> file for email, Tavily, OpenAI API keys, etc.</li>
-            <li><strong>Dependencies:</strong> <code>langchain</code>, <code>langchain-ollama</code>, <code>langgraph</code>, <code>python-dotenv</code>, <code>tzlocal</code>, <code>tavily-python</code> — see the project README.</li>
+            <li>Python 3.9 or higher</li>
+            <li><a href="https://ollama.com" target="_blank" rel="noopener noreferrer">Ollama</a> installed and running</li>
+            <li>Ollama model (default <code>gpt-oss:120b-cloud</code>; change in <code>config/settings.py</code> if needed)</li>
           </ul>
+          <p><strong>1. Get the repo</strong></p>
+          <p>Clone or download: <a href="https://github.com/StDoses72/Corque-AI-agent" target="_blank" rel="noopener noreferrer">github.com/StDoses72/Corque-AI-agent</a></p>
+          <p><strong>2. Install dependencies</strong></p>
+          <pre class="install-code"><code>pip install langchain langchain-ollama langgraph python-dotenv tzlocal tavily-python</code></pre>
+          <p><strong>3. Optional: environment variables</strong></p>
+          <p>Create a <code>.env</code> file in the project root for email and optional APIs:</p>
+          <pre class="install-code"><code>EMAIL_USER=your-email@example.com
+EMAIL_PASS=your-email-password
+SMTP_SERVER=smtp.example.com
+IMAP_SERVER=imap.example.com
+TAVILY_API_KEY=your-tavily-api-key   # Optional, for web search
+OPENAI_API_KEY=your-openai-key      # Optional, to use OpenAI</code></pre>
+          <p>For Gmail use <code>smtp.gmail.com</code> and <code>imap.gmail.com</code>; you’ll need an <a href="https://support.google.com/accounts/answer/185833" target="_blank" rel="noopener noreferrer">app password</a>.</p>
+          <p><strong>4. Run Corque</strong></p>
+          <p>On Windows: double-click <code>run.bat</code>. Otherwise:</p>
+          <pre class="install-code"><code>python main.py</code></pre>
+          <p>When you see “Corque is ready to assist you!”, start chatting. Type <code>quit</code> to exit.</p>
         </div>
 
         <div id="concepts" class="doc-block reveal">
